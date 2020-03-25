@@ -24,5 +24,58 @@
 extern "C"
 int main(int numer_of_arguments, char * arguments[])
 {
+
+    SDL_Window* window;                    // Declare a pointer
+
+    SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
+
+    // Create an application window with the following settings:
+    window = SDL_CreateWindow(
+        "SDL EXAMPLE WINDOW",              // window title
+        SDL_WINDOWPOS_UNDEFINED,           // initial x position
+        SDL_WINDOWPOS_UNDEFINED,           // initial y position
+        640,                               // width, in pixels
+        480,                               // height, in pixels
+        SDL_WINDOW_OPENGL                  // flags - see below
+    );
+
+    // Check that the window was successfully created
+    if (window == NULL) {
+        // In the case that the window could not be made...
+        return 1;
+    }
+
+   
+
+    // The window is open: could enter program loop here (see SDL_PollEvent())
+
+     //Main loop flag
+    bool quit = false;
+
+    //Event handler
+    SDL_Event e;
+
+    //While application is running
+    while (!quit)
+    {
+        //Handle events on queue
+        while (SDL_PollEvent(&e) != 0)
+        {
+            //User requests quit
+            if (e.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+        }
+
+
+    }
+
+    // Close and destroy the window
+    SDL_DestroyWindow(window);
+
+    // Clean up
+    SDL_Quit();
     return 0;
+
 }
